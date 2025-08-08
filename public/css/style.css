@@ -1,0 +1,74 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.btn-primary {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+.btn-primary:hover {
+    background-color: #a50000;
+    border-color: #a50000;
+}
+
+#backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #cc0000;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+#backToTop:hover {
+    background-color: #a50000;
+}
+
+/* Логотип */
+.logo-img {
+    height: 28px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Ссылки в navbar и footer */
+.navbar .nav-link,
+.footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar .nav-link:hover,
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Чтобы футер всегда был внизу */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

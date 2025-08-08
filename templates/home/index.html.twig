@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Video Center{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Dernières vidéos</h1>
+
+    <div class="row">
+        {% for video in videos %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <iframe class="card-img-top"
+                            width="300"
+                            height="200"
+                            src="{{ video.videoLink|replace({'watch?v=': 'embed/'}) }}"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ video.title|length > 20 ? video.title|slice(0, 20) ~ '...' : video.title }}
+                        </h5>
+                        <p class="card-text">
+                            {{ video.description|length > 25 ? video.description|slice(0, 25) ~ '...' : video.description }}
+                        </p>
+                        <small class="text-muted">
+                            Publié le {{ video.createdAt|date('d/m/Y') }}<br>
+                            par {{ video.user }}
+                        </small>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{{ path('app_video_show', { id: video.id }) }}" class="btn btn-primary btn-sm">
+                            Voir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucune vidéo disponible.</p>
+        {% endfor %}
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(videos) }}
+    </div>
+{% endblock %}
