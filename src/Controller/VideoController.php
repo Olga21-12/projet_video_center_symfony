@@ -17,12 +17,16 @@ final class VideoController extends AbstractController
     #[Route(name: 'video_index', methods: ['GET'])]
     public function index(VideoRepository $videoRepository): Response
     {
-        return $this->render('video/index.html.twig', [
-            'videos' => $videoRepository->findAll(),
-        ]);
+        $videos = $this->getDoctrine()
+                   ->getRepository(Video::class)
+                   ->findAll();
+
+    return $this->render('profile/index.html.twig', [
+        'videos' => $videos,  // обязательно передать эту переменную
+    ]);
     }
 
-    #[Route('/new', name: 'video_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_video_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $video = new Video();
@@ -42,7 +46,7 @@ final class VideoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'video_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_video_show', methods: ['GET'])]
     public function show(Video $video): Response
     {
         return $this->render('video/show.html.twig', [
@@ -50,7 +54,7 @@ final class VideoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'video_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_video_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Video $video, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(VideoType::class, $video);
@@ -68,7 +72,7 @@ final class VideoController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'video_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_video_delete', methods: ['POST'])]
     public function delete(Request $request, Video $video, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$video->getId(), $request->getPayload()->getString('_token'))) {

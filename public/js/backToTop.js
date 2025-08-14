@@ -1,13 +1,22 @@
-let btn = document.getElementById("backToTop");
+const navbar = document.querySelector('.navbar');
+  const backToTopBtn = document.getElementById('backToTop');
 
-window.onscroll = function() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.display = "block";
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
     } else {
-        btn.style.display = "none";
+      navbar.classList.remove('scrolled');
     }
-};
 
-btn.onclick = function() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-};
+    // Показать/скрыть кнопку "вверх"
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  // При нажатии прокрутка наверх
+  backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });

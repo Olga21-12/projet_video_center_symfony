@@ -10,10 +10,19 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use App\Entity\Traits\Timestampable;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ORM\Table(name: 'users')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'user.emailUnique')]
+
+#[Vich\Uploadable]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -23,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 8)]
+    #[Assert\Email()]
     private ?string $email = null;
 
     /**
@@ -38,39 +50,77 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+     #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 35)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
+     #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 70)]
     private ?string $lastname = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\Column]
-    private ?bool $isVerified = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageName = null;
-
-    /**
+     /**
      * @var Collection<int, Video>
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, orphanRemoval: true)]
     private Collection $videos;
 
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $image = null;
+
+    #[Vich\UploadableField(mapping: 'user', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = "sans_photo.png";
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
+    private Collection $comments;
+
+   /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
+    use Timestampable; // добавляется чтобы не сохранялось с пустой строкой
+
+    // --- ID ---
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    // --- EMAIL ---
     public function getEmail(): ?string
     {
         return $this->email;
@@ -79,22 +129,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
+    // --- USER IDENTIFIER ---
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
+    // --- ROLES ---
     /**
      * @see UserInterface
+     *
+     * @return list<string>
      */
     public function getRoles(): array
     {
@@ -131,22 +179,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
+     * @see UserInterface
      */
-    public function __serialize(): array
-    {
-        $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
-
-        return $data;
-    }
-
-    #[\Deprecated]
     public function eraseCredentials(): void
     {
-        // @deprecated, to be removed when upgrading to Symfony 8
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+        ];
+    }
+
+    // --- FIRSTNAME / LASTNAME ---
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -155,7 +205,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
@@ -167,35 +216,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+   
+
+    public function getImageFile(): ?File
     {
-        return $this->createdAt;
+        return $this->imageFile;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setImageName(?string $imageName): void
     {
-        $this->createdAt = $createdAt;
+        $this->imageName = $imageName;
+    }
 
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    // --- VIDEOS ---
+    /**
+     * @return Collection<int, Video>
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): static
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->setUser($this);
+        }
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function removeVideo(Video $video): static
     {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
+        if ($this->videos->removeElement($video)) {
+            if ($video->getUser() === $this) {
+                $video->setUser(null);
+            }
+        }
         return $this;
     }
 
-    public function isVerified(): ?bool
+    public function isVerified(): bool
     {
         return $this->isVerified;
     }
@@ -207,64 +286,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getImageName(): ?string
+    public function __toString(): string
     {
-        return $this->imageName;
+        return $this->getFirstname() . ' ' . $this->getLastname();
     }
 
-    public function setImageName(?string $imageName): static
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
     {
-        $this->imageName = $imageName;
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
+        }
 
         return $this;
     }
 
-    /**
- * @return Collection<int, Video>
- */
-public function getVideos(): Collection
-{
-    return $this->videos;
-}
-
-public function addVideo(Video $video): self
-{
-    if (!$this->videos->contains($video)) {
-        $this->videos->add($video);
-        $video->setUser($this);
-    }
-
-    return $this;
-}
-
-public function removeVideo(Video $video): self
-{
-    if ($this->videos->removeElement($video)) {
-        if ($video->getUser() === $this) {
-            $video->setUser(null);
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
         }
+
+        return $this;
     }
-
-    return $this;
-}
-
-    public function __toString(): string
-{
-    return $this->getFirstname() . ' ' . $this->getLastname();
-}
-
-
-    #[ORM\PrePersist]
-public function onPrePersist(): void
-{
-    $this->createdAt = new \DateTimeImmutable();
-    $this->updatedAt = new \DateTimeImmutable();
-}
-
-#[ORM\PreUpdate]
-public function onPreUpdate(): void
-{
-    $this->updatedAt = new \DateTimeImmutable();
-}
-
 }

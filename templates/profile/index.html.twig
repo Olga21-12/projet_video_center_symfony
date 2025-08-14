@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<div class="card shadow-sm p-4">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            {% if user.imageName %}
+                <img src="{{ asset('uploads/users/' ~ user.imageName) }}" alt="Photo" class="img-fluid rounded-circle mb-3">
+            {% else %}
+                <img src="{{ asset('image/default-avatar.png') }}" alt="Photo" class="img-fluid rounded-circle mb-3">
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+            <p>Email : {{ user.email }}</p>
+            <p>Membre depuis : {{ user.createdAt|date('d/m/Y') }}</p>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h4 class="mt-4">Mes vidéos ({{ videoCount }})</h4>
+<div class="row">
+    {% for video in videos %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <p class="card-text">{{ video.description|slice(0,100) ~ '...' }}</p>
+                    <a href="{{ video.videoLink }}" target="_blank" class="btn btn-primary btn-sm">Voir</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Aucune vidéo ajoutée pour le moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}

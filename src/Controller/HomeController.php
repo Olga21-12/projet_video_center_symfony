@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/', name: 'app_home')]
     public function index(
         EntityManagerInterface $em,
         PaginatorInterface $paginator,

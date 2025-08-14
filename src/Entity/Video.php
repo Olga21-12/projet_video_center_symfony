@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +43,17 @@ class Video
     #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'videos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $type = null;
+
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'video')]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,5 +167,35 @@ public function onPrePersist(): void
 public function onPreUpdate(): void
 {
     $this->updatedAt = new \DateTimeImmutable();
+}
+
+/**
+ * @return Collection<int, Comment>
+ */
+public function getComments(): Collection
+{
+    return $this->comments;
+}
+
+public function addComment(Comment $comment): static
+{
+    if (!$this->comments->contains($comment)) {
+        $this->comments->add($comment);
+        $comment->setVideo($this);
+    }
+
+    return $this;
+}
+
+public function removeComment(Comment $comment): static
+{
+    if ($this->comments->removeElement($comment)) {
+        // set the owning side to null (unless already changed)
+        if ($comment->getVideo() === $this) {
+            $comment->setVideo(null);
+        }
+    }
+
+    return $this;
 }
 }
