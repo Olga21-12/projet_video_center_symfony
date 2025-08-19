@@ -1,17 +1,17 @@
 <footer class="footer bg-dark text-white mt-auto py-3">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         <div class="mb-2 mb-md-0">
-            <a href="{{ path('app_home') }}" class="footer-link me-3">Home</a>
+            <a href="{{ path('app_home') }}" class="footer-link me-3">{{ 'footer.home'|trans }}</a>
             {% if app.user %}
-                <a href="{{ path('app_video_new') }}" class="footer-link me-3">Ajouter vidéo</a>
-                <a href="{{ path('app_logout') }}" class="footer-link">Déconnexion</a>
+                <a href="{{ path('app_video_new') }}" class="footer-link me-3">{{ 'footer.add_video'|trans }}</a>
+                <a href="{{ path('app_logout') }}" class="footer-link">{{ 'footer.logout'|trans }}</a>
             {% else %}
-                <a href="{{ path('app_login') }}" class="footer-link me-3">Connexion</a>
-                <a href="{{ path('app_register') }}" class="footer-link">Inscription</a>
+                <a href="{{ path('app_login') }}" class="footer-link me-3">{{ 'footer.login'|trans }}</a>
+                <a href="{{ path('app_register') }}" class="footer-link">{{ 'footer.register'|trans }}</a>
             {% endif %}
         </div>
         <div class="text-white small">
-            &copy; {{ "now"|date("Y") }} Video Center. Tous droits réservés.
+            &copy; {{ "now"|date("Y") }} VideoCenter Olala. Tous droits réservés.
         </div>
     </div>
 </footer>

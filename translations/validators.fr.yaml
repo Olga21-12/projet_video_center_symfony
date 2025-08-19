@@ -148,8 +148,8 @@ Error: Erreur
 'Please select a valid option.': 'Veuillez sélectionner une option valide.'
 'Please select a valid range.': 'Veuillez sélectionner une plage valide.'
 'Please enter a valid week.': 'Veuillez entrer une semaine valide.'
-user.emailUnique: __user.emailUnique
-'Please enter a password': '__Please enter a password'
-'Your password should be at least {{ limit }} characters': '__Your password should be at least {{ limit }} characters'
-'Veuillez télécharger une image JPG ou PNG': '__Veuillez télécharger une image JPG ou PNG'
-'Please enter your email': '__Please enter your email'
+user.emailUnique: 'Cet e-mail est déjà enregistré dans la base.'
+'Please enter a password': 'Veuillez entrer un mot de passe'
+'Your password should be at least {{ limit }} characters': 'Votre mot de passe doit comporter au moins {{ limit }} caractères'
+'Veuillez télécharger une image JPG ou PNG': 'Veuillez télécharger une image JPG ou PNG'
+'Please enter your email': 'Veuillez entrer votre adresse email'

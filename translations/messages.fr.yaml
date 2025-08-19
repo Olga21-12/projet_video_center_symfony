@@ -1,2 +1,34 @@
 vich_uploader.form_label.delete_confirm: 'Supprimer?'
 vich_uploader.link.download: Télécharger
+'Vous devez être connecté pour accéder à votre profil.': 'Vous devez être connecté pour accéder à votre profil.'
+'Vous devez être connecté pour modifier votre profil.': 'Vous devez être connecté pour modifier votre profil.'
+'Vous devez confirmer votre adresse e-mail avant de pouvoir modifier votre profil.': 'Vous devez confirmer votre adresse e-mail avant de pouvoir modifier votre profil.'
+'Profil mis à jour avec succès.': 'Profil mis à jour avec succès.'
+'Vous devez être connecté pour supprimer votre compte.': 'Vous devez être connecté pour supprimer votre compte.'
+'Votre compte a été supprimé.': 'Votre compte a été supprimé.'
+'Action non autorisée.': 'Action non autorisée.'
+navBar.home: Accueil
+navBar.ajouterVideo: 'Ajouter Vidéo'
+navBar.monProfil: 'Mon Profil'
+navBar.deconnexion: 'Se déconnecter'
+navBar.connexion: 'Se connecter'
+navBar.inscription: "S'inscrire"
+videoForm.title: Titre
+videoForm.videoLink: 'Lien de la vidéo'
+footer.home: Accueil
+footer.add_video: 'Ajouter Vidéo'
+footer.logout: 'Se déconnecter'
+footer.login: 'Se connecter'
+footer.register: "S'inscrire"
+profile.email: 'Email : '
+profile.video_count: 'Nombre de vidéos : '
+profile.popular_types: 'Types populaires : '
+profile.member_since: 'Membre depuis : '
+profile.edit: Modifier
+profile.delete_account: 'Supprimer mon compte'
+profile.add_video: 'Ajouter une vidéo'
+profile.mesVideos: 'Mes vidéos '
+profile.view: 'Voir '
+profile.no_videos: 'Aucune vidéo ajoutée pour le moment.'
+videoForm.save: Enregistrer
+videoForm.back_to_profile: 'Retour au profil'

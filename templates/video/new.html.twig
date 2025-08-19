@@ -3,9 +3,27 @@
 {% block title %}New Video{% endblock %}
 
 {% block body %}
-    <h1>Create new Video</h1>
 
-    {{ include('video/_form.html.twig') }}
+<div class="container mt-4" style="max-width: 75%;">
 
-    <a href="{{ path('app_profile') }}">back to list</a>
+    <h1 class="mb-4 text-center">✏️ {{ 'newVideo.title'|trans }}</h1>
+
+    {{ form_start(monForm) }}
+    {{ form_row(monForm.title) }}
+    {{ form_row(monForm.videoLink) }}
+    {{ form_row(monForm.description) }}
+    {{ form_row(monForm.premiumVideo) }}
+    {{ form_row(monForm.type) }}
+
+    <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap flex-md-nowrap">
+        <button type="submit" class="btn btn-success btn-lg px-4">
+            {{ 'videoForm.save'|trans }}
+        </button>
+        <a href="{{ path('app_profile') }}" class="btn btn-secondary btn-lg px-4">
+            {{ 'videoForm.back_to_profile'|trans }}
+        </a>
+    </div>
+{{ form_end(monForm) }}
+    
+</div>
 {% endblock %}

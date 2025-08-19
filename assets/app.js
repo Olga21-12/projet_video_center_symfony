@@ -7,6 +7,10 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 
+import './styles/app.css';       // на всякий случай — так ты гарантированно подтянешь CSS
+import './js/navbar.js';         // твой скрипт со скроллом
+import './js/backToTop.js';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 

@@ -3,11 +3,27 @@
 {% block title %}Edit Video{% endblock %}
 
 {% block body %}
-    <h1>Edit Video</h1>
+<div class="container mt-4" style="max-width: 75%;">
+    
+        <h1 class="mb-4 text-center">✏️ {{ 'editVideo.title'|trans }}</h1>
 
-    {{ include('video/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ form_start(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.videoLink) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.premiumVideo) }}
+            {{ form_row(form.type) }}
 
-    <a href="{{ path('app_video_index') }}">back to list</a>
+            <div class="d-flex flex-wrap gap-2 mt-4 justify-content-center">
+                <button class="btn btn-success px-4">
+                    {{ 'videoForm.save'|trans }}
+                </button>
+                <a href="{{ path('app_profile') }}" class="btn btn-secondary px-4">
+                    ⬅️ {{ 'videoForm.back_to_profile'|trans }}
+                </a>
+               
+            </div>
+        {{ form_end(form) }}
+</div>
 
-    {{ include('video/_delete_form.html.twig') }}
 {% endblock %}

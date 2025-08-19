@@ -14,28 +14,94 @@
         </div>
         <div class="col-md-9">
             <h3>{{ user.firstname }} {{ user.lastname }}</h3>
-            <p>Email : {{ user.email }}</p>
-            <p>Membre depuis : {{ user.createdAt|date('d/m/Y') }}</p>
+            <p>{{'profile.email'|trans}} {{ user.email }}</p>
+            <p>{{'profile.video_count'|trans}} {{ videoCount }}</p>
+
+           {% if popularTypes %}
+                <p>{{'profile.popular_types'|trans}} {{ popularTypes|join(', ') }}</p>
+            {% endif %}
+
+            <p>{{'profile.member_since'|trans}} {{ user.createdAt|date('d/m/Y') }}</p>
+
+            <div class="d-flex flex-wrap gap-2 mt-3 justify-content-center justify-content-md-start">
+                <a href="{{ path('app_profile_edit', {id: user.id}) }}" class="btn btn-warning">
+                    {{ 'profile.edit'|trans }}
+                </a>
+
+                <form method="post" action="{{ path('app_profile_delete') }}" onsubmit="return confirm('Êtes-vous sûr ?');" class="m-0">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn-danger">{{ 'profile.delete_account'|trans }}</button>
+                </form>
+
+                <a href="{{ path('app_video_new') }}" class="btn btn-success">{{ 'profile.add_video'|trans }}</a>
         </div>
     </div>
 </div>
 
 <hr>
 
-<h4 class="mt-4">Mes vidéos ({{ videoCount }})</h4>
+<h4 class="mt-4">{{ 'profile.mesVideos'|trans }} ({{ videoCount }})</h4>
 <div class="row">
     {% for video in videos %}
         <div class="col-md-4 mb-3">
             <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ video.title }}</h5>
-                    <p class="card-text">{{ video.description|slice(0,100) ~ '...' }}</p>
-                    <a href="{{ video.videoLink }}" target="_blank" class="btn btn-primary btn-sm">Voir</a>
+                <div class="card-body text-center">
+                    <iframe width="300" height="200"
+                            src="{{ video.videoLink }}"
+                            title="{{ video.title }}"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
                 </div>
-            </div>
+
+        <div class="card-body">
+            <h5 class="card-title text-truncate">
+                <a href="{{ path('app_video_show', {id: video.id}) }}" class="text-decoration-none">
+                {{ video.title }}</a>
+            </h5>
+            
+            <p class="card-text text-truncate">{{ video.description }}</p>
+
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="d-flex gap-2">
+                    <a href="{{ path('app_video_show', {id: video.id}) }}" class="btn btn-primary btn-sm">
+                     {{ 'profile.view'|trans }}
+                    </a>
+                              
+                <a class="btn btn-warning btn-sm" href="{{ path('app_video_edit', {id: video.id}) }}">✏️</a>
+                <a class="btn btn-danger btn-sm" href="{{ path('app_video_delete', {id: video.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?')">🗑</a>
+         
+               
+               </div>
+           
+
+    
+    {% if video.premiumVideo %}
+        <span class="text-warning fs-5">⭐</span>
+    {% endif %}
+</div>
+ 
+            <p class="mt-2 text-white small">
+                {{ video.createdAt|ago }} •
+                {{ video.user.firstname }}
+                <img src="{{ asset(video.user.imageName ? 'uploads/users/' ~ video.user.imageName : 'image/default-avatar.png') }}"
+                     alt="{{ video.user.firstname }}"
+                     class="rounded-circle me-1"
+                     style="width:20px; height:20px; object-fit:cover;">
+
+            </p>
         </div>
+        
+    </div>
+</div>
     {% else %}
-        <p>Aucune vidéo ajoutée pour le moment.</p>
+        <p>{{ 'profile.no_videos'|trans }}</p>
     {% endfor %}
 </div>
+
+<div class="d-flex justify-content-center mt-4">
+    {{ knp_pagination_render(videos) }}
+</div>
+
+
 {% endblock %}

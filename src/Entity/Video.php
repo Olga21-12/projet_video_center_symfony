@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
+#[UniqueEntity(fields: ['videoLink'], message: 'Cette vidéo existe déjà.')]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'videos')]
 class Video
@@ -21,7 +23,7 @@ class Video
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 500)]
+    #[ORM\Column(length: 500, unique: true)]
     private ?string $videoLink = null;
 
     #[ORM\Column(type: Types::TEXT)]

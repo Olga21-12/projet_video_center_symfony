@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
     ): Response {
 
         if($this->getUser()){
-            $this->addFlash('error', 'Already Connected !');
+            $this->addFlash('info', 'Vous êtes déjà connecté.');
             return $this->redirectToRoute('app_profile');
         }
 
@@ -58,7 +58,9 @@ class RegistrationController extends AbstractController
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+                    ->context([
+                            'user' => $user])
+                );
 
             return $this->redirectToRoute('app_login');
         }
@@ -67,7 +69,7 @@ class RegistrationController extends AbstractController
             ]);
         }
 
-        
+
 
    #[Route('/verify/email', name: 'app_verify_email')]
 public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
@@ -88,6 +90,6 @@ public function verifyUserEmail(Request $request, TranslatorInterface $translato
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_profile');
     }
 }

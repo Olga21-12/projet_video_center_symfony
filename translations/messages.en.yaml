@@ -1,0 +1,40 @@
+# translations.en.yaml
+vich_uploader:
+  form_label:
+    delete_confirm: "Delete?"
+  link:
+    download: "Download"
+
+messages:
+  must_be_logged_in_profile: "You must be logged in to access your profile."
+  must_be_logged_in_edit: "You must be logged in to edit your profile."
+  must_confirm_email: "You must confirm your email address before you can edit your profile."
+  profile_updated: "Profile updated successfully."
+  must_be_logged_in_delete: "You must be logged in to delete your account."
+  account_deleted: "Your account has been deleted."
+  unauthorized_action: "Unauthorized action."
+  navBar.home: 'Home'
+  navBar.ajouterVideo: 'Add Video'
+  navBar.monProfil: 'My Profile'
+  navBar.deconnexion: LogOut
+  navBar.connexion: LogIn
+  navBar.inscription: 'Register'
+  videoForm.title: 'Titre'
+  videoForm.videoLink: 'Lien de la vidéo'
+  footer.home: 'Accueil'
+  footer.add_video: 'Ajouter Vidéo'
+  footer.logout: 'Se déconnecter'
+  footer.login: 'Se connecter'
+  footer.register: "S'inscrire"
+  profile.email: 'Email'
+  profile.video_count: 'Nombre de vidéos'
+  profile.popular_types: 'Types populaires'
+  profile.member_since: 'Membre depuis'
+  profile.edit: 'Modifier'
+  profile.delete_account: 'Supprimer mon compte'
+  profile.add_video: 'Ajouter une vidéo'
+  profile.mesVideos: 'Mes vidéos'
+  profile.view: 'Voir'
+  profile.no_videos: 'Aucune vidéo ajoutée pour le moment.'
+  videoForm.save: 'Enregistrer'
+  videoForm.back_to_profile: 'Retour au profil'

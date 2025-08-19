@@ -3,44 +3,46 @@
 {% block title %}Video{% endblock %}
 
 {% block body %}
-    <h1>Video</h1>
+<div class="container mt-4" style="max-width: 800px;">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ video.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ video.title }}</td>
-            </tr>
-            <tr>
-                <th>VideoLink</th>
-                <td>{{ video.videoLink }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ video.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ video.createdAt ? video.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ video.updatedAt ? video.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>PremiumVideo</th>
-                <td>{{ video.premiumVideo ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="text-center mb-4">
+        <iframe width="100%" height="450"
+                src="{{ video.videoLink }}"
+                title="{{ video.title }}"
+                frameborder="0"
+                allowfullscreen
+                style="border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        </iframe>
+    </div>
 
-    <a href="{{ path('app_video_index') }}">back to list</a>
+    <div class="card shadow-sm p-4 mb-4">
+        <h2 class="mb-3">{{ video.title }}</h2>
+        <p class="text-white">{{ video.description | nl2br }}</p>
+        <p class="fw-bold">Vidéo créée par {{ video.user.firstname }}</p>
 
-    <a href="{{ path('app_video_edit', {'id': video.id}) }}">edit</a>
+        <div class="dates text-white small mt-3">
+            <div>📅 Créée le {{ video.createdAt | date('d/m/Y') }}</div>
+            <div>⏱ Mise à jour le {{ video.updatedAt | date('d/m/Y H:i') }}</div>
+        </div>
+    </div>
 
-    {{ include('video/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+        {% if app.user and app.user.email is same as(video.user.email) %}
+            <a class="btn btn-primary btn-sm px-3" 
+               href="{{ path('app_video_edit', {id: video.id}) }}">
+                ✏️ {{ 'videoShow.edit'|trans }}
+            </a>
+            <a class="btn btn-danger btn-sm px-3" 
+               href="{{ path('app_video_delete', {id: video.id}) }}" 
+               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?')">
+                🗑 {{ 'videoShow.delete'|trans }}
+            </a>
+        {% endif %}
+        <a class="btn btn-secondary btn-sm px-3" 
+           href="{{ path('app_profile') }}">
+            ⬅️ {{ 'videoShow.goBack'|trans }}
+        </a>
+    </div>
+
+</div>
 {% endblock %}

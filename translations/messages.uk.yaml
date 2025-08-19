@@ -1,0 +1,21 @@
+# translations.uk.yaml
+vich_uploader:
+  form_label:
+    delete_confirm: "Видалити?"
+  link:
+    download: "Завантажити"
+
+messages:
+  must_be_logged_in_profile: "Ви повинні увійти в систему, щоб отримати доступ до свого профілю."
+  must_be_logged_in_edit: "Ви повинні увійти в систему, щоб редагувати свій профіль."
+  must_confirm_email: "Ви повинні підтвердити свою електронну адресу, перш ніж редагувати профіль."
+  profile_updated: "Профіль успішно оновлено."
+  must_be_logged_in_delete: "Ви повинні увійти в систему, щоб видалити свій обліковий запис."
+  account_deleted: "Ваш обліковий запис було видалено."
+  unauthorized_action: "Невірна дія."
+  navBar.home: Домашня сторінка
+  navBar.ajouterVideo: 'Створити відео'
+  navBar.monProfil: 'Моя сторінка'
+  navBar.deconnexion: Вхід
+  navBar.connexion: Вихід
+  navBar.inscription: Реєстрація

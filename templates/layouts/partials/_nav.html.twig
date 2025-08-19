@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm position-relative fixed-top">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ path('app_home') }}">
             <img src="{{ asset('image/logo.png') }}" alt="Logo" class="logo-img me-2">
-            Video Center
+            VideoCenter Olala
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -10,17 +10,49 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        {% if app.user %}
+        <div class="nav-user-center">
+    
+        <a href="{{ path('app_profile') }}" class="d-flex align-items-center text-decoration-none">
+            {% if app.user.imageName %}
+                <img src="{{ asset('uploads/users/' ~ app.user.imageName) }}"
+                     alt="{{ app.user.firstname }}"
+                     class="rounded-circle me-2"
+                     style="width:40px; height:40px; object-fit:cover;">
+            {% else %}
+                <img src="{{ asset('image/default-avatar.png') }}"
+                     alt="{{ app.user.firstname }}"
+                     class="rounded-circle me-2"
+                     style="width:40px; height:40px; object-fit:cover;">
+            {% endif %}
+            <span class="fw-bold">{{ app.user.firstname }}</span>
+        </a>
+    {% endif %}
+</div>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Vidéos</a></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_home' ? 'active' : ''}}" href={{ path('app_home') }}>{{'navBar.home'|trans}}</a>
+                    </li>
                 {% if app.user %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_video_new') }}">Ajouter vidéo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_profile') }}">Mon profil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_video_new' ? 'active' : ''}}" href={{ path('app_video_new') }}>{{'navBar.ajouterVideo'|trans}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_profile' ? 'active' : ''}}" href={{ path('app_profile') }}>{{'navBar.monProfil'|trans}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_logout' ? 'active' : ''}}" href={{ path('app_logout') }}>{{'navBar.deconnexion'|trans}}</a>
+                    </li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_login' ? 'active' : ''}}" href={{ path('app_login') }}>{{'navBar.connexion'|trans}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{app.current_route == 'app_register' ? 'active' : ''}}" href={{ path('app_register') }}>{{'navBar.inscription'|trans}}</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
