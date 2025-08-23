@@ -12,10 +12,49 @@ messages:
   profile_updated: "Профіль успішно оновлено."
   must_be_logged_in_delete: "Ви повинні увійти в систему, щоб видалити свій обліковий запис."
   account_deleted: "Ваш обліковий запис було видалено."
-  unauthorized_action: "Невірна дія."
-  navBar.home: Домашня сторінка
+  unauthorized_action: "Невірна дія"
+  navBar.home: 'Домашня сторінка'
   navBar.ajouterVideo: 'Створити відео'
   navBar.monProfil: 'Моя сторінка'
   navBar.deconnexion: Вхід
   navBar.connexion: Вихід
   navBar.inscription: Реєстрація
+  videoForm.title: Назва
+  videoForm.videoLink: 'Посилання на відео'
+  footer.home: Домашня сторінка
+  footer.add_video: 'Створити відео'
+  footer.logout: Вийти
+  footer.login: Увійти
+  footer.register: Реєстрація
+  profile.email: 'Електронна адресса:'
+  profile.video_count: 'Кількість відео: '
+  profile.popular_types: 'Найпопулярніші жанри: '
+  profile.member_since: 'Зареєстрований з: '
+  profile.edit: Редагувати
+  profile.delete_account: 'Видалити мій профіль'
+  profile.add_video: 'Створити відео'
+  profile.mesVideos: 'Мої відео'
+  profile.view: 'Переглянути'
+  profile.no_videos: 'На даний момент відео не додано'
+  videoForm.save: 'Зберегти'
+  videoForm.back_to_profile: 'Повернутися до профілю'
+  editVideo.title: 'Редагувати відео'
+  newVideo.title: 'Створити відео'
+  videoShow.edit: 'Редагувати відео'
+  videoShow.delete: Видалити
+  videoShow.goBack: 'Повернутися до списку відео'
+  registrationForm.firstname: "Ім'я"
+  registrationForm.lastname: Фамілія
+  registrationForm.email: 'Електронна адресса'
+  registrationForm.plainPassword: Пароль
+  registrationForm.plainPassword2: 'Підтвердити пароль'
+  registrationForm.photoDeProfil: 'Фото профілю'
+  registrationForm.agreeTerms: 'Я приймаю умови'
+  userForm.firstname: "Ім'я"
+  userForm.lastname: Фамілія
+  userForm.email: 'Електронна адресса'
+  userForm.photo: 'Фото профілю'
+  home.welcome: 'Ласкаво просимо до відеоцентру OLALA'
+  home.welcome_text: 'На цьому сайті ви знайдете кілька цікавих відео. Для перегляду деяких відео вам потрібно буде зареєструватися.'
+  home.videos: 'Список відео'
+  home.view: Переглянути

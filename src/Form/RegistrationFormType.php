@@ -61,6 +61,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 'download_uri' => false,
                 'image_uri' => false,
+                'allow_delete' => false, 
             ])
         ;
     }

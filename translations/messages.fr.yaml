@@ -32,3 +32,23 @@ profile.view: 'Voir '
 profile.no_videos: 'Aucune vidéo ajoutée pour le moment.'
 videoForm.save: Enregistrer
 videoForm.back_to_profile: 'Retour au profil'
+editVideo.title: 'Edit Video'
+newVideo.title: 'Créer une vidéo'
+videoShow.edit: 'Editer une vidéo'
+videoShow.delete: Supprimer
+videoShow.goBack: 'Retour à la liste'
+registrationForm.firstname: Prénom
+registrationForm.lastname: Nom
+registrationForm.email: E-mail
+registrationForm.plainPassword: 'Mot de passe'
+registrationForm.plainPassword2: 'Confirmez mot de passe'
+registrationForm.photoDeProfil: 'Photo de profil'
+registrationForm.agreeTerms: "J'accepte les termes et conditions"
+userForm.firstname: Prénom
+userForm.lastname: Nom
+userForm.email: E-mail
+userForm.photo: 'Photo de profil'
+home.welcome: 'Bienvenue dans VidéoCenter OLALA'
+home.welcome_text: 'Sur ce site vous trouverez plusieurs vidéos intéressantes. Pour certaines vidéos il faudra être enregistré pour les voirs.'
+home.videos: 'Liste des vidéos'
+home.view: Voir

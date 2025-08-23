@@ -25,6 +25,9 @@ class ProfileController extends AbstractController
                           PaginatorInterface $paginator,
                           Request $request): Response
     {
+
+        /** @var \App\Entity\User $user */
+
         $user = $this->getUser();
 
         if (!$user) {
@@ -32,8 +35,8 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    if (!$user->isVerified()) {
-        $this->addFlash("info","Votre adresse email n'est pas vérifiée !");
+        if (!$user->isVerified()) {
+            $this->addFlash("info","Votre adresse email n'est pas vérifiée !");
     }
 
     $query = $videoRepository->createQueryBuilder('v')
@@ -129,11 +132,4 @@ class ProfileController extends AbstractController
         $this->addFlash('error', $translator->trans('Action non autorisée.'));
         return $this->redirectToRoute('app_profile');
     }
-
-
-
-
-
-
-
 }

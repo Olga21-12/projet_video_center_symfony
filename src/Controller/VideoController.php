@@ -85,18 +85,17 @@ final class VideoController extends AbstractController
             */
             $user = $this->getUser();
             if(!$user->isVerified()){
-                $this->addFlash("error", "Vous devez confirmer votre email pour éditer une vidéo !");
-                return $this->redirectToRoute('app_video_index');
+                $this->addFlash("info", "Vous devez confirmer votre email pour éditer une vidéo !");
+                return $this->redirectToRoute('app_profile');
             }
             if($user->getEmail() !== $video->getUser()->getEmail()){
-                $this->addFlash("error", "Vous devez être ". $video->getUser()->getEmail() . " pour éditer cette vidéo !");
-                return $this->redirectToRoute('app_video_index');
+                $this->addFlash("info", "Vous devez être ". $video->getUser()->getEmail() . " pour éditer cette vidéo !");
+                return $this->redirectToRoute('app_profile');
             }    
         }else{
-            $this->addFlash("error", "Vous devez vous connecter pour éditer une vidéo !");
+            $this->addFlash("info", "Vous devez vous connecter pour éditer une vidéo !");
             return $this->redirectToRoute("app_login");
         }
-
 
         $form = $this->createForm(VideoType::class, $video);
         $form->handleRequest($request);

@@ -17,3 +17,5 @@ app:
     prefix: /{_locale}
     requirements:
         _locale: en|fr|uk
+    defaults:
+        _locale: fr    
