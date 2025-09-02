@@ -17,17 +17,18 @@
     {% endif %}
 
     <div class="container-profile-login">
-        <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+
+        <h1 class="h3 mb-3 font-weight-normal text-center">{{ 'login.title'|trans }}</h1>
 
         <div class="mb-3 row align-items-center">
-            <label for="username" class="col-sm-3 col-form-label fw-bold text-center">Email</label>
+            <label for="username" class="col-sm-3 col-form-label fw-bold text-center">{{ 'login.email'|trans }}</label>
             <div class="col-sm-9">
                 <input type="email" value="{{ last_username }}" name="email" id="username" class="form-control" autocomplete="email" required autofocus>
             </div>
         </div>
 
         <div class="mb-3 row align-items-center">
-            <label for="password" class="col-sm-3 col-form-label fw-bold text-center">Password</label>
+            <label for="password" class="col-sm-3 col-form-label fw-bold text-center">{{ 'login.password'|trans }}</label>
             <div class="col-sm-9">
                 <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
             </div>
@@ -35,12 +36,13 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {#<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>#}
-
-        <button class="btn btn-lg btn-success mt-3" type="submit">Sign in</button>
+<div class="mb-3">
+        <a href="{{ path('app_forgot_password_request') }}">{{ 'login.forgot_password'|trans }}</a>
+</div>
+        <button class="btn btn-lg btn-success mt-3" type="submit">{{ 'login.sign_in'|trans }}</button>
 
         <p class="mt-4 text-center text-muted">
-            Not registered yet? <a href="{{ path('app_register') }}">Create an account</a>
+            {{ 'login.not_registered'|trans }} <a href="{{ path('app_register') }}">{{ 'login.create_account'|trans }}</a>
         </p>
     </div>
 </form>

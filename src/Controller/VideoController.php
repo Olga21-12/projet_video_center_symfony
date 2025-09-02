@@ -34,11 +34,11 @@ final class VideoController extends AbstractController
             $user = $this->getUser();
 
             if(!$user->isVerified()){
-                $this->addFlash("info", "Vous devez confirmer votre adresse e-mail avant d'ajouter une vidéo.");
+                $this->addFlash("info", $translator->trans("videoController.emailNotVerified"));
                 return $this->redirectToRoute('app_profile');
             }
         }else{
-            $this->addFlash("info", "Vous devez vous connecter pour créer une vidéo !");
+            $this->addFlash("info", $translator->trans("videoController.videoNotCreated"));
             return $this->redirectToRoute("app_login");
         }
 
@@ -76,7 +76,7 @@ final class VideoController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_video_edit')]
-    public function edit(Request $request, Video $video, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Video $video, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         
         if($this->getUser()){
@@ -85,7 +85,7 @@ final class VideoController extends AbstractController
             */
             $user = $this->getUser();
             if(!$user->isVerified()){
-                $this->addFlash("info", "Vous devez confirmer votre email pour éditer une vidéo !");
+                $this->addFlash("info", $translator->trans("videoController.emailNotVerifiedEdit"));
                 return $this->redirectToRoute('app_profile');
             }
             if($user->getEmail() !== $video->getUser()->getEmail()){
@@ -93,7 +93,7 @@ final class VideoController extends AbstractController
                 return $this->redirectToRoute('app_profile');
             }    
         }else{
-            $this->addFlash("info", "Vous devez vous connecter pour éditer une vidéo !");
+            $this->addFlash("info", $translator->trans("videoController.videoNotEdite"));
             return $this->redirectToRoute("app_login");
         }
 
@@ -103,9 +103,9 @@ final class VideoController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){  // для работы кнопки и замены данных в базе данных
                 $video->setUpdatedAt(new DateTimeImmutable());
                 $entityManager->flush();
-                $this->addFlash('success','La vidéo a bien été modifiée'); //сообщение и успешном редактировании рецепта
+                $this->addFlash('success', $translator->trans("videoController.videoEdite")); //сообщение и успешном редактировании видео
               //  return $this->redirectToRoute('app_video_index'); // после редактирования переходит на страницу списка рецептов
-                return $this->redirectToRoute('app_video_show', ['id' => $video->getId(),]); // после редактирования переходит на страницу рецепта
+                return $this->redirectToRoute('app_video_show', ['id' => $video->getId(),]); // после редактирования переходит на страницу видео
             } 
 
         return $this->render('video/edit.html.twig', [

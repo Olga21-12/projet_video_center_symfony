@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container-profile-edit">
-    <h1 class="mb-4 text-center">Modifier le profil</h1>
+    <h1 class="mb-4 text-center">{{ 'profile.edit'|trans }}</h1>
 
     {{ form_start(form) }}
         {{ form_row(form.firstname) }}
@@ -13,8 +13,8 @@
         {{ form_row(form.imageFile) }}
 
         <div class="button-row">
-            <button class="btn btn-success">Enregistrer</button>
-            <a href="{{ path('app_profile') }}" class="btn btn-secondary">Annuler</a>
+            <button class="btn btn-success">{{ 'profile.save'|trans }}</button>
+            <a href="{{ path('app_profile') }}" class="btn btn-secondary">{{ 'profile.back_to_profile'|trans }}</a>
         </div>
     {{ form_end(form) }}
 </div>

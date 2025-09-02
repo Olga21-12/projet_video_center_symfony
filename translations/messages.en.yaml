@@ -13,48 +13,81 @@ messages:
   must_be_logged_in_delete: "You must be logged in to delete your account"
   account_deleted: "Your account has been deleted"
   unauthorized_action: "Unauthorized action"
-  navBar.home: Home
-  navBar.ajouterVideo: 'Add Video'
-  navBar.monProfil: 'My Profile'
-  navBar.deconnexion: LogOut
-  navBar.connexion: LogIn
-  navBar.inscription: Register
-  videoForm.title: Titre
-  videoForm.videoLink: 'Lien de la vidéo'
-  footer.home: Home
-  footer.add_video: 'Add Video'
-  footer.logout: LogOut
-  footer.login: LogIn
-  footer.register: Register
-  profile.email: E-mail
-  profile.video_count: 'Number of videos'
-  profile.popular_types: 'Popular types'
-  profile.member_since: 'Member since'
-  profile.edit: 'Edit'
-  profile.delete_account: 'Delete my account'
-  profile.add_video: 'Add Video'
-  profile.mesVideos: 'My Videos'
-  profile.view: 'View'
-  profile.no_videos: 'No videos added yet.'
-  videoForm.save: 'Save'
-  videoForm.back_to_profile: 'Back to profile'
-  editVideo.title: 'Edit Video'
-  newVideo.title: 'Create Video'
-  videoShow.edit: 'Edit Video'
-  videoShow.delete: 'Delete'
-  videoShow.goBack: 'Back to video list'
-  registrationForm.firstname: FirstName
-  registrationForm.lastname: LastName
-  registrationForm.email: Email
-  registrationForm.plainPassword: 'Password'
-  registrationForm.plainPassword2: 'Confirm Password'
-  registrationForm.photoDeProfil: 'Profile Photo'
-  registrationForm.agreeTerms: 'I agree to the terms and conditions'
-  userForm.firstname: FirstName
-  userForm.lastname: LastName
-  userForm.email: Email
-  userForm.photo: 'Profile Photo'
-  home.welcome: 'Welcome to VideoCenter OLALA'
-  home.welcome_text: 'On this site you will find several interesting videos. For some videos you will need to be registered to view them.'
-  home.videos: 'Video list'
-  home.view: View
+navBar:
+  home: Home
+  ajouterVideo: 'Add Video'
+  monProfil: 'My Profile'
+  deconnexion: LogOut
+  connexion: LogIn
+  inscription: Register
+videoForm:
+  title: Title
+  videoLink: 'Video Link'
+  save: 'Save'
+  back_to_profile: 'Back to profile'
+  description: 'Video Description'
+  premiumVideo: 'Premium Video'
+  type: 'Video Type'
+footer:
+  home: Home
+  add_video: 'Add Video'
+  logout: LogOut
+  login: LogIn
+  register: Register
+profile:
+  email: E-mail
+  video_count: 'Number of videos'
+  popular_types: 'Popular types'
+  member_since: 'Member since'
+  edit: 'Edit'
+  delete_account: 'Delete my account'
+  add_video: 'Add Video'
+  mesVideos: 'My Videos'
+  view: 'View'
+  no_videos: 'No videos added yet.'
+  save: 'Save'
+  back_to_profile: 'Back to profile'
+editVideo:
+  title: 'Edit Video'
+newVideo:
+  title: 'Create Video'
+videoShow:
+  edit: 'Edit Video'
+  delete: 'Delete'
+  goBack: 'Back to video list'
+registrationForm:
+  firstname: FirstName
+  lastname: LastName
+  email: Email
+  plainPassword: 'Password'
+  plainPassword2: 'Confirm Password'
+  photoDeProfil: 'Profile Photo'
+  agreeTerms: 'I agree to the terms and conditions'
+userForm:
+  firstname: FirstName
+  lastname: LastName
+  email: Email
+  photo: 'Profile Photo'
+home:
+  welcome: 'Welcome to VideoCenter OLALA'
+  welcome_text: 'On this site you will find several interesting videos. For some videos you will need to be registered to view them.'
+  videos: 'Video list'
+  view: View
+registration:
+  title: Registration
+  submit: Register
+videoController:
+  emailNotVerified: "You must confirm your email address before adding a video."
+  videoNotCreated: "You must be logged in to create a video!"
+  emailNotVerifiedEdit: "You must confirm your email to edit a video!"
+  videoNotEdite: "You must be logged in to edit a video!"
+  videoEdite: "The video has been successfully edited."
+login:
+  title: Login
+  email: Email
+  password: Password
+  forgot_password: Forgot Password
+  sign_in: Sign In
+  not_registered: Not Registered
+  create_account: Create Account
+

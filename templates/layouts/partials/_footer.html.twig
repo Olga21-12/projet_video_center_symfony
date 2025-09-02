@@ -16,6 +16,8 @@
                         aria-expanded="false">
                     {% if app.request.locale == 'en' %}
                         <span class="flag">🇬🇧</span> English
+                    {% elseif app.request.locale == 'uk' %}
+                        <span class="flag">🇺🇦</span> Українська
                     {% else %}
                         <span class="flag">🇫🇷</span> Français
                     {% endif %}
@@ -31,6 +33,12 @@
                         <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'),
                             app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">
                             <span class="flag">🇫🇷</span> Français
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'),
+                            app.request.attributes.get('_route_params')|merge({'_locale': 'uk'})) }}">
+                            <span class="flag">🇺🇦</span> Українська
                         </a>
                     </li>
                 </ul>

@@ -9,16 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use App\Entity\Traits\Timestampable;
-
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\InappropriateWords;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'users')]
 #[UniqueEntity(fields: ['email'], message: 'user.emailUnique')]
 
@@ -33,7 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank()]
-    #[Assert\Length(min: 8)]
+    #[InappropriateWords]
+    #[Assert\Length(min: 5)]
     #[Assert\Email()]
     private ?string $email = null;
 
@@ -51,11 +53,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
      #[Assert\NotBlank()]
+     #[InappropriateWords]
     #[Assert\Length(min: 2, max: 35)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
      #[Assert\NotBlank()]
+     #[InappropriateWords]
     #[Assert\Length(min: 2, max: 70)]
     private ?string $lastname = null;
 

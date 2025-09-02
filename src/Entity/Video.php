@@ -9,6 +9,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\InappropriateWords;
+
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 #[UniqueEntity(fields: ['videoLink'], message: 'Cette vidéo existe déjà.')]
 #[ORM\HasLifecycleCallbacks]
@@ -21,12 +24,18 @@ class Video
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[InappropriateWords]
+    #[Assert\Length(min: 3)]
     private ?string $title = null;
 
     #[ORM\Column(length: 500, unique: true)]
     private ?string $videoLink = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank()]
+    #[InappropriateWords]
+    #[Assert\Length(min: 20)]
     private ?string $description = null;
 
     #[ORM\Column]

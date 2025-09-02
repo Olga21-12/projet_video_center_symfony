@@ -9,11 +9,11 @@
     <h1 class="mb-4 text-center">✏️ {{ 'newVideo.title'|trans }}</h1>
 
     {{ form_start(monForm) }}
-    {{ form_row(monForm.title) }}
-    {{ form_row(monForm.videoLink) }}
-    {{ form_row(monForm.description) }}
-    {{ form_row(monForm.premiumVideo) }}
-    {{ form_row(monForm.type) }}
+    {{ form_row(monForm.title, {'label_attr': {'class': 'fw-bold text-center'}}) }}
+    {{ form_row(monForm.videoLink, {'label_attr': {'class': 'fw-bold text-center'}}) }}
+    {{ form_row(monForm.description, {'label_attr': {'class': 'fw-bold text-center'}}) }}
+    {{ form_row(monForm.premiumVideo, {'label_attr': {'class': 'fw-bold text-center'}}) }}
+    {{ form_row(monForm.type, {'label_attr': {'class': 'fw-bold text-center'}}) }}
 
     <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap flex-md-nowrap">
         <button type="submit" class="btn btn-success btn-lg px-4">

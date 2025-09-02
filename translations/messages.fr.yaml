@@ -52,3 +52,22 @@ home.welcome: 'Bienvenue dans VidéoCenter OLALA'
 home.welcome_text: 'Sur ce site vous trouverez plusieurs vidéos intéressantes. Pour certaines vidéos il faudra être enregistré pour les voirs.'
 home.videos: 'Liste des vidéos'
 home.view: Voir
+registration.title: Inscription
+registration.submit: "S'inscrire"
+videoForm.description: 'Description de la vidéo'
+videoForm.premiumVideo: 'Vidéo premium'
+videoForm.type: 'Type de vidéo'
+videoController.emailNotVerified: "Vous devez confirmer votre adresse e-mail avant d'ajouter une vidéo."
+videoController.videoNotCreated: 'Vous devez vous connecter pour créer une vidéo !'
+videoController.emailNotVerifiedEdit: 'Vous devez confirmer votre email pour éditer une vidéo !'
+videoController.videoNotEdite: 'Vous devez vous connecter pour éditer une vidéo !'
+videoController.videoEdite: 'La vidéo a bien été modifiée'
+login.title: Login
+login.email: 'Email'
+login.password: 'Mot de passe'
+login.forgot_password: 'Mot de passe oublié ?'
+login.sign_in: 'Se connecter'
+login.not_registered: 'Pas encore inscrit ?'
+login.create_account: 'Créer un compte'
+profile.save: 'Enregistrer'
+profile.back_to_profile: 'Retour au profil'
