@@ -17,8 +17,8 @@ navBar:
   home: 'Домашня сторінка'
   ajouterVideo: 'Створити відео'
   monProfil: 'Моя сторінка'
-  deconnexion: Вхід
-  connexion: Вихід
+  deconnexion: Вихід
+  connexion: Вхід
   inscription: Реєстрація
 videoForm:
   title: Назва
